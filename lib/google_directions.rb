@@ -25,7 +25,7 @@ class GoogleDirections
     @options = opts.merge({:origin => @origin, :destination => @destination})
     path = BASE_PATH + '?' + querify(@options)
     @url = BASE_URL + sign_path(path, @options)
-    @xml = open(@url).read
+    open(@url) { |io| @xml = io.read }
     @doc = Nokogiri::XML(@xml)
     @status = @doc.css('status').text
   end
