@@ -1,7 +1,6 @@
 # Rakefile
 require 'rubygems'
 require 'rake'
-require 'echoe'
 
 require 'rake/testtask'
 require 'minitest'

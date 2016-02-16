@@ -49,7 +49,7 @@ class GoogleDirectionsTest < Minitest::Test
   def test_distance_text
     directions = GoogleDirections.new("Place du Maquis du Vercors PARIS-19EME", "rue poissoniere 75002 paris")
     assert_equal String, directions.distance_text.class
-    assert_equal "6.7 km", directions.distance_text
+    assert_equal "6.2 km", directions.distance_text
   end
 
   def test_zero_distance_text
