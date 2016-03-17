@@ -49,7 +49,7 @@ class GoogleDirections
     unless successful?
       @distance = 0
     else
-      @distance = @doc.css("distance value").last.text
+      @distance = @doc.css("distance value").last.text.to_f
     end
   end
 

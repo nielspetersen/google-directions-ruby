@@ -9,6 +9,7 @@ class GoogleDirectionsTest < Minitest::Test
     orig = "121 Gordonsville Highway, 37030"
     dest = "499 Gordonsville Highway, 38563"
     directions = GoogleDirections.new(orig, dest)
+    assert_equal(5845.0, directions.distance)
     assert_equal(4, directions.distance_in_miles)
     assert_equal(5, directions.drive_time_in_minutes)
     assert_equal(directions.successful?, true)
@@ -21,6 +22,7 @@ class GoogleDirectionsTest < Minitest::Test
 
   def test_directions_not_found
     directions = GoogleDirections.new("fasfefasdfdfsd", "499 Gordonsville Highway, 38563")
+    assert_equal(0, directions.distance)
     assert_equal(0, directions.distance_in_miles)
     assert_equal(0, directions.drive_time_in_minutes)
     assert_equal("NOT_FOUND", directions.status)
@@ -29,6 +31,7 @@ class GoogleDirectionsTest < Minitest::Test
 
   def test_zero_results
     directions = GoogleDirections.new("27 Beemdenlaan, 2550 Kontich", "499 Gordonsville Highway, 38563")
+    assert_equal(0, directions.distance)
     assert_equal(0, directions.distance_in_miles)
     assert_equal(0, directions.drive_time_in_minutes)
     assert_equal("ZERO_RESULTS", directions.status)
