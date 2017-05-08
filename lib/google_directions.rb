@@ -110,18 +110,15 @@ class GoogleDirections
     def sign_path(path, options)
       return path unless options[:private_key]
 
-      raw_private_key = url_safe_base64_decode(options[:private_key])
+      raw_private_key = Base64.urlsafe_decode64(options[:private_key])
       digest = OpenSSL::Digest.new('sha1')
       raw_signature = OpenSSL::HMAC.digest(digest, raw_private_key, path)
       path + "&signature=#{url_safe_base64_encode(raw_signature)}"
     end
 
-    def url_safe_base64_decode(base64_string)
-      Base64.decode64(base64_string.tr('-_', '+/'))
-    end
 
     def url_safe_base64_encode(raw)
-      Base64.encode64(raw).tr('+/', '-_').strip
+      Base64.urlsafe_encode64(raw).strip
     end
 
 end
